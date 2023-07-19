@@ -1,0 +1,58 @@
+﻿@model MyApp.Models.Account.SignUpUser
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SignUp page</title>
+</head>
+<body>
+    <div class="container border" style="padding:20px">
+        <form asp-action="SignUp" method="post">
+
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="UserName"></label>
+                </div>
+                <div class="col-2">
+                    <input type="text" asp-for="UserName" class="form-control">
+                </div>
+                <span class="text-danger" asp-validation-for="UserName"></span>
+                <br />
+                <div class="col-2">
+                    <label asp-for="Email"></label>
+                </div>
+                <div class="col-2">
+                    <input type="email" asp-for="Email" class="form-control">
+                </div>
+                <span class="text-danger" asp-validation-for="Email"></span>
+                <br />
+                <div class="col-2">
+                    <label asp-for="Password"></label>
+                </div>
+                <div class="col-2">
+                    <input type="password" asp-for="Password" class="form-control">
+                </div>
+                <span class="text-danger" asp-validation-for="Password"></span>
+                <br />
+                <div class="col-3">
+                    <select asp-for="State">
+                        <option selected>Pupil</option>
+                        <option>Student</option>
+                        <option>Graduated</option>
+                    </select>
+                </div>
+                <br />
+                <div class="form-group row">
+
+                    <div class="col-5">
+                        <br />
+                        <input type="submit" class="btn btn-primary" value="Register">
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>
