@@ -1,2 +1,6 @@
 ﻿@inject SignInManager<IdentityUser> _signInManager
-@inject UserManager _userManager
+@inject UserManager<IdentityUser> _userManager
+@if(_signInManager.IsSignedIn(User))
+{
+
+}

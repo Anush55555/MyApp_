@@ -30,12 +30,25 @@ public class AccountController : Controller
     }
 
     [HttpPost]
-    public IActionResult SignUp(SignUpUser user)
+    public async Task<IActionResult> SignUp(SignUpUser user)
     {
-        _context.UserSignUp.Add(user);
-        _context.SaveChanges();
+        //_context.UserSignUp.Add(user);
+        //_context.SaveChanges();
         if (ModelState.IsValid)
-            return RedirectToAction("Index","Home");
+        {
+            var _user = new IdentityUser { UserName = user.Email, PasswordHash = user.Password };
+            var result = await  _userManager.CreateAsync(_user, user.Password);
+
+            if(result.Succeeded)
+            {
+                await _signInManager.SignInAsync(_user, isPersistent: false);
+                return RedirectToAction("Index", "Home");
+            }
+            foreach(var error in result.Errors)
+            {
+                ModelState.AddModelError(" ", error.Description);
+            }
+        }
         return View();
     }
 
@@ -48,13 +61,10 @@ public class AccountController : Controller
     [HttpPost]
    public IActionResult SignIn(SignInUserModel user)
     {
-        //System.Threading.Thread.Sleep(200);
-        //var checkEmail = _context.UserSignUp.Where(x => x.Email == user.SignInUser.Email).SingleOrDefault();
-        //var checkPassword = _context.UserSignUp.Where(y => y.Password == user.SignInUser.Password).SingleOrDefault();
-        //if (!ModelState.IsValid || checkEmail == null || checkPassword == null)
-        //{
-        //    return View("UserNotFound");
-        //}
+        if (ModelState.IsValid)
+        {
+            
+        }
         return RedirectToAction("Index", "Home");
     }
 
