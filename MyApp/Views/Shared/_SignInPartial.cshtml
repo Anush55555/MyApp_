@@ -1,6 +1,19 @@
 ﻿@inject SignInManager<IdentityUser> _signInManager
 @inject UserManager<IdentityUser> _userManager
+
+<ul class="navbar-nav">
 @if(_signInManager.IsSignedIn(User))
 {
-
+    <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignOut">LogOut</a>
+    </li>
 }
+else{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignIn">SignIn</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignUp">Register</a>
+    </li>
+}
+</ul>
